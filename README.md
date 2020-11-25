@@ -12,7 +12,7 @@ The goal of the research paper is to predict whether a Diplomacy game would end 
 2. *What is the probability of betrayal happening next season given the messages received so far?*
 ---
 ### Proposed dataset
-**Diplomacy Betrayal Dataset**: This dataset is the same dataset used in the paper given to us. Due to the nature of our paper, there are no other datasets that have similar properties(that we can find). We are not going to modify or augment the data as doing so might disrupt the relationships between the messages in an unpredictable way.
+- **Diplomacy Betrayal Dataset**: This dataset is the same dataset used in the paper provided to us. Due to the nature of our paper, there are no other datasets that have similar properties(that we can find). We are not going to modify or augment the data as doing so might disrupt the relationships between the messages in an unpredictable way.
 
 ---
 ### Methods
@@ -23,7 +23,11 @@ We plan to implement two different Neural Network architectures and compare thei
 ---
 ### Proposed timeline
 
+Until the submission date overall we have 3 more weeks, therefore our project timeline is the following:
 
+<p align="center">
+<img  width="400" src='https://github.com/epfl-ada/ada-2020-project-milestone-p3-p3_mgm/blob/master/Images/project_timeline.png'>
+</p>
 
 ---
 
