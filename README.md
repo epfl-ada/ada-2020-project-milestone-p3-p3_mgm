@@ -31,6 +31,16 @@ Until the submission date overall we have 3 more weeks, therefore our project ti
 
 ---
 
+### Organization of code
+
+Our code is organized in 3 notebooks and one pyhton script:
+- question_1.ipynb   # notebook containing the code for the first research question
+- question_2.ipynb   # notebook containing the code for the second research question
+- plots.ipynb        # containg plots explaining the results from the feature extraction
+- helpers.py         # containing helper functions used in the notebooks
+
+---
+
 ### Organization within the team
 1. Creating a code skeleton for model training. (*Marija and Görkem*)
    - Loading data, Splitting data, Empty model creation…
