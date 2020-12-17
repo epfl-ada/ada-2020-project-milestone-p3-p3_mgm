@@ -16,7 +16,7 @@ def last_act(entry):
     '''
     return [ season['season'] for season in entry['seasons'][:-1] if 'support' in season['interaction'].values()][-1]
     
-    
+   
 def seasons_before_betrayal(entry):
     '''
         entry    -> the entry
@@ -149,7 +149,7 @@ def batch(labels, features, batch_size):
         random.shuffle(indx)
         yield np_labels[indx], np_features[indx]
         
-        
+       
 def train_model(model, labels, features,X_validation, y_validation, no_epoch, batch_size, optimizer, criterion,cuda_is_available, verbose = True):
     accuracy_v = []
     accuracy_t = []
@@ -183,6 +183,7 @@ def train_model(model, labels, features,X_validation, y_validation, no_epoch, ba
                 i += 1
                 
         #validation
+        #Perform the same operations as above but without calculating the gradient
         model.eval()
         with torch.no_grad():
             predictions_v = None
@@ -201,7 +202,8 @@ def train_model(model, labels, features,X_validation, y_validation, no_epoch, ba
             
     print('Finished Training')
     return accuracy_v,accuracy_t,f1_scores,matthews_corrcoefs
-    
+ 
+#Compares the two outcomes from the network and assigns a label according to the bigger value    
 def predict_label(model, features):
     with torch.no_grad():
         model.eval()
@@ -225,29 +227,29 @@ def cross_validation(net_first_layer_size, labels, features, k_fold, no_epoch, b
     ms_arr = []
     i = 0
     for train_index, validation_index in kf.split(features):
-        
+        #Split the dataset into train and validation sets
         X_train, X_validation = features[train_index], features[validation_index]
         y_train, y_validation = labels[train_index], labels[validation_index]
-        
+        #Correct the unbalanced nature of our dataset. Not always used.
         if apply_smote:
             oversample = SMOTE()
             X_train, y_train = oversample.fit_sample(X_train, y_train)
             rand_idx=np.random.permutation(len(X_train))
             X_train = X_train[rand_idx]
             y_train = y_train[rand_idx]
-        
+        #Apply standardization to both sets
         X_train,mean,std = standardize(X_train)
         X_validation,_,_ = standardize(X_validation,mean,std,True)
-        
+        #Use cuda in order to speed up the computation if tis available
         if cuda_is_available:
             model = Net(net_first_layer_size).cuda()
         else:
             model = Net(net_first_layer_size)
-
+        #Set the Loss functions and the optimizer
         criterion = nn.CrossEntropyLoss()
         optimizer = optim.Adam(model.parameters(), lr)
 
-        
+        #Calculate the evaluation metrics such as accuracy and f1 score
         accuracy_ve,accuracy_te,f1_scorese,matthews_corrcoefse = train_model(model, y_train, X_train, X_validation, y_validation, no_epoch, batch_size, optimizer, criterion,cuda_is_available,True)
         accuracy_v_epoch.append(accuracy_ve)
         accuracy_t_epoch.append(accuracy_te)
@@ -273,7 +275,7 @@ def cross_validation(net_first_layer_size, labels, features, k_fold, no_epoch, b
             i = i+1
     return (accuracy_v, accuracy_t, f1_scores, matthews_corrcoefs),(accuracy_v_epoch,accuracy_t_epoch,f1_scores_epoch,matthews_corrcoefs_epoch), ms_arr
 
-##NN model
+##Our Fully connected Linear Neural Network Model
 class Net(nn.Module):
     def __init__(self,first_layer_size):
         super(Net, self).__init__()
