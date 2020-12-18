@@ -44,10 +44,10 @@ Our code is organized in 3 notebooks and one pyhton script:
 ### Organization within the team
 1. Creating a code skeleton for model training. (*Marija and Görkem*)
    - Loading data, Splitting data, Empty model creation…
-2. Linguistic feature selection to be used as an input vector.(*Marija and Mert*)
+2. Linguistic feature selection used as an input vector.(*Marija and Mert*)
 3. Code RNN and Linear model and test the accuracy for research question 1.(*Mert and Görkem*)
 4. Visualize the results and compare them with the Linguistic Harbingers of Betrayal: A Case Study on an Online Strategy Game.(*Görkem and Marija*)
 5. Repeat  3 and 4 for research question 2.(*Marija and Mert*)
-6. Repeat 2-5 until we have a plausible conclusion.(*Split will be determined after we have a result*)
+6. Repeat 2-5 until we had some a plausible conclusions.(*As a team*)
 7. Write a report about our results.(*As a team*)
 8. Film a video. (*As a team*)
